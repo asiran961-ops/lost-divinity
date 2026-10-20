@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090c0b">
+  <meta name="description" content="몰락한 신수들의 신 - 동양 판타지 세계관, 인물록, 여정 안내">
+  <title>신위록 神緯錄 | 세계관</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23090c0b'/%3E%3Crect x='14' y='14' width='36' height='36' rx='3' fill='%238d3028'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-size='25' fill='%23eadbb9'%3E神%3C/text%3E%3C/svg%3E">
+  <script>
+    /* 같은 세션에서 이미 서신을 연 방문자는 오프닝을 건너뛴다 */
+    try { if (sessionStorage.getItem('sinwirok-opened')) document.documentElement.classList.add('skip-opening'); } catch (e) {}
+  </script>
+</head>
+<body class="gate-locked">
+
+  <audio id="bgm" src="assets/audio/bgm.mp3" loop preload="auto"></audio>
+
+  <!-- ═══════════ 오프닝 ═══════════ -->
+  <div class="opening-screen" id="openingScreen">
+    <div class="opening-motes" aria-hidden="true"></div>
+
+    <div class="envelope-stage" id="envelopeStage">
+      <div class="envelope-float">
+        <div class="envelope" id="envelope">
+          <div class="env-back"></div>
+          <div class="env-sheet"><small>봉인된 신록</small><b>神緯錄</b></div>
+          <div class="env-front"></div>
+          <p class="env-address"><b>수신</b>세계의 근원이신 주신께</p>
+          <p class="env-from">태허궁에서 삼가 올림</p>
+          <div class="env-flap-shadow" id="flapShadow"></div>
+          <div class="env-flap" id="envFlap"><div class="face"><span class="pattern">❖ ❖ ❖</span></div><div class="inner"></div></div>
+          <button class="wax-seal" id="waxSeal" type="button" aria-label="봉인을 뜯어 서신 열기">
+            <span class="glow" aria-hidden="true"></span>
+            <span class="half l" aria-hidden="true">封</span>
+            <span class="half r" aria-hidden="true">封</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-final" id="letterFinal" hidden>
+      <div class="parchment-card">
+        <span class="parchment-corner corner-tl" aria-hidden="true">封</span>
+        <span class="parchment-corner corner-tr" aria-hidden="true">緘</span>
+        <p class="parchment-address rv" style="--d:.05s"><span>수신</span>세계의 근원이신 주신께</p>
+        <p class="parchment-kicker rv" style="--d:.1s">봉인된 신록</p>
+        <h1 class="parchment-title" aria-label="신위록 神緯錄"><i style="--d:.15s">神</i><i style="--d:.3s">緯</i><i style="--d:.45s">錄</i></h1>
+        <p class="parchment-subtitle rv" style="--d:.75s">몰락한 신수들의 신</p>
+        <p class="parchment-copy rv" style="--d:1s">끊어진 신맥 너머에서<br>수천 년을 기다린 이들의 기록을 올린다.</p>
+        <p class="parchment-date rv" style="--d:1.3s">대진력 3021년 · 태허궁</p>
+      </div>
+      <button class="enter-btn" id="enterBtn" type="button">기록 살펴보기<span class="arr" aria-hidden="true">→</span></button>
+    </div>
+
+    <p class="opening-hint" aria-hidden="true">인장을 눌러 봉인을 뜯어 보세요</p>
+  </div>
+  <canvas class="opening-fx" id="openingFx" aria-hidden="true"></canvas>
+
+  <!-- ═══════════ 상단 바 ═══════════ -->
+  <header class="topbar" id="top">
+    <div class="shell bar-inner">
+      <a class="brand" href="#" data-tab="lore"><span class="brand-mark">神</span><strong>신위록</strong></a>
+      <nav class="main-tabs" role="tablist" aria-label="메인 메뉴">
+        <button role="tab" id="tab-lore" aria-controls="view-lore" aria-selected="true" data-tab="lore">세계관<span class="hj">世界</span></button>
+        <button role="tab" id="tab-characters" aria-controls="view-characters" aria-selected="false" data-tab="characters">인물록<span class="hj">人物</span></button>
+        <button role="tab" id="tab-journey" aria-controls="view-journey" aria-selected="false" data-tab="journey">여정 안내<span class="hj">旅程</span></button>
+      </nav>
+      <button id="bgmToggleBtn" class="bgm-btn off" type="button" aria-label="음악 켜기/끄기">♪ BGM</button>
+    </div>
+  </header>
+
+  <!-- ═══════════ 세계관 ═══════════ -->
+  <main id="view-lore" class="tab-view" role="tabpanel" aria-labelledby="tab-lore">
+    <section class="page-hero lore-hero">
+      <div class="shell lore-hero-grid">
+        <div>
+          <p class="overline">WORLDVIEW · 세계관</p>
+          <h1>몰락한 신수들의 신,<br><span>봉인에서 깨어난 주신의 부활</span></h1>
+          <div class="lore-story">
+            <p>신력을 독점하려던 인간들이 거대한 결계 ‘대진’으로 주신을 봉인했습니다. 신맥이 끊긴 채 흐른 수천 년, 신수들은 버림받았다는 오해 속에서 조금씩 무너져 갔습니다.</p>
+            <p class="lore-story-end">그리고 낡은 대진이 흔들리던 밤, 당신이 눈을 뜹니다.</p>
+          </div>
+        </div>
+        <aside class="record-slip" aria-label="신록 표지">
+          <p class="slip-head"><span>신록 표지</span><em>대진력 3021년</em></p>
+          <dl>
+            <div><dt>당신</dt><dd>봉인에서 깨어난 주신</dd></div>
+            <div><dt>현재</dt><dd>신위 0% · 끊어진 신맥</dd></div>
+            <div><dt>목표</dt><dd>다섯 신수와 다시 이어지기</dd></div>
+            <div><dt>위협</dt><dd>천경 · 기억 저편의 암운</dd></div>
+          </dl>
+          <span class="slip-seal" aria-hidden="true">太虛<br>之印</span>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="shell">
+        <div class="q-grid">
+          <article class="q-card">
+            <p class="q-head"><span class="q-no">一</span>나는 누구인가</p>
+            <h3>봉인에서 깨어난 주신</h3>
+            <p>대진에 갇혀 수천 년을 잠들었다가 폐허가 된 태허궁에서 눈을 떴습니다. 아직은 세계와 이어진 힘이 거의 없습니다.</p>
+            <div class="stat-chips"><span class="chip">신위 <b>0%</b></span><span class="chip">신력 <b>약 20%</b></span><span class="chip">대진 <b>100%</b></span></div>
+          </article>
+          <article class="q-card">
+            <p class="q-head"><span class="q-no">二</span>왜 신수를 찾는가</p>
+            <h3>끊어진 신맥, 버림받았다고 믿는 이들</h3>
+            <p>봉인된 사이 신맥이 끊겼고, 다섯 신수는 버림받았다고 믿으며 탁기와 광기 속에 마모되어 갔습니다. 주신의 힘은 그들과의 인연에서 돌아옵니다.</p>
+          </article>
+          <article class="q-card">
+            <p class="q-head"><span class="q-no">三</span>무엇이 달라지는가</p>
+            <h3>신위가 오르고, 대진이 무너진다</h3>
+            <p>신수와 가까워질수록 신위가 오르고 대진은 약해집니다. 다시 이어진 신수는 곁에서 새로운 길을 열어 줍니다.</p>
+          </article>
+          <article class="q-card">
+            <p class="q-head"><span class="q-no">四</span>누가 움직이는가</p>
+            <h3>세 개의 세력</h3>
+            <ul class="faction-lines">
+              <li><b>수호 신수 진영</b>주신과의 인연을 되찾으려는 이들</li>
+              <li class="empire"><b>천경 기공학 연합</b>대진을 되살려 주신을 통제하려는 인간 제국</li>
+              <li class="shadow"><b>기억 저편의 암운</b>주신의 신격을 노리는 고대의 존재들</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" id="terms">
+      <div class="shell">
+        <div class="section-head">
+          <p class="overline">KEY WORDS · 핵심어</p>
+          <h2>이야기를 여는 여섯 개의 말</h2>
+                  </div>
+
+        <div class="term-grid" id="termCards"></div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="shell">
+        <div class="section-head">
+          <p class="overline">GEOGRAPHY · 세계의 지리</p>
+          <h2>태허궁을 중심으로 한 다섯 신역</h2>
+          <p>태허궁을 가운데 두고 사방으로 신역이 펼쳐지며, 그 바깥에 인간 제국 천경이 있습니다.</p>
+        </div>
+        <figure class="geography-image"><img src="https://i.imgur.com/aLyOklo.png" alt="태허궁을 중심으로 북쪽 백야산, 서쪽 백호궁, 동쪽 창연, 남쪽 화림, 남서쪽 천경이 펼쳐진 세계 지도" loading="lazy"><figcaption>중앙의 태허궁에서 시작해, 원하는 신역으로 여정을 이어가세요.</figcaption></figure>
+      </div>
+    </section>
+
+    <div class="shell next-cta">
+      <p>이 세계를 살아가는 이들을 만나 보세요.</p>
+      <button class="cta-btn" type="button" data-tab="characters">인물록 보기 →</button>
+    </div>
+  </main>
+
+  <!-- ═══════════ 인물록 ═══════════ -->
+  <main id="view-characters" class="tab-view" role="tabpanel" aria-labelledby="tab-characters" hidden>
+    <section class="page-hero">
+      <div class="shell">
+        <p class="overline">CHARACTERS · 인물록</p>
+        <h1>세계의 왕좌를 둘러싼<br><span>기록된 이들과 가려진 운명</span></h1>
+        <p class="lead">세력별로 골라 볼 수 있고, 인물을 누르면 자세한 기록이 펼쳐집니다.</p>
+      </div>
+    </section>
+
+    <div class="filter-bar">
+      <div class="shell filter-inner" role="group" aria-label="세력별 보기">
+        <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">전체 <span class="cnt" data-count="all"></span></button>
+        <button class="filter-btn" type="button" data-filter="guardian" aria-pressed="false"><span class="dot"></span>수호 신수 <span class="cnt" data-count="guardian"></span></button>
+        <button class="filter-btn" type="button" data-filter="empire" aria-pressed="false"><span class="dot"></span>천경 <span class="cnt" data-count="empire"></span></button>
+        <button class="filter-btn" type="button" data-filter="shadow" aria-pressed="false"><span class="dot"></span>암운 <span class="cnt" data-count="shadow"></span></button>
+      </div>
+    </div>
+
+    <section class="faction-block is-guardian" data-faction="guardian">
+      <div class="shell">
+        <div class="faction-header"><div><p class="overline">FACTION 01</p><h2>수호 신수 진영<small>守護神獸</small></h2><p>긴 단절 끝에 저마다의 결핍과 상처를 안고 주신을 기다려 온 수호자들.</p></div></div>
+        <div class="guardian-list" data-list="guardian"></div>
+      </div>
+    </section>
+    <section class="faction-block is-empire" data-faction="empire">
+      <div class="shell">
+        <div class="faction-header"><div><p class="overline">FACTION 02</p><h2>천경 기공학 연합<small>天京</small></h2><p>신력을 자원으로 삼아 대진을 다시 움직이려는 인간 제국의 중심인물들.</p></div></div>
+        <div class="guardian-list" data-list="empire"></div>
+      </div>
+    </section>
+    <section class="faction-block is-shadow" data-faction="shadow">
+      <div class="shell">
+        <div class="faction-header"><div><p class="overline">FACTION 03</p><h2>기억 저편의 암운<small>暗雲</small></h2><p>대진의 균열 너머에서 저마다의 욕망을 품고 주신과 신수 사이를 파고드는 존재들.</p></div></div>
+        <div class="guardian-list" data-list="shadow"></div>
+      </div>
+    </section>
+
+    <div class="shell next-cta">
+      <p>누구를 먼저 찾아갈지는 주신이 정합니다.</p>
+      <button class="cta-btn" type="button" data-tab="journey">여정 안내 보기 →</button>
+    </div>
+
+  </main>
+
+  <!-- ═══════════ 여정 안내 ═══════════ -->
+  <main id="view-journey" class="tab-view" role="tabpanel" aria-labelledby="tab-journey" hidden>
+    <section class="page-hero page-hero--compact">
+      <div class="shell">
+        <p class="overline">JOURNEY · 여정 안내</p>
+        <h1>봉인을 풀고,<br><span>끊어진 신맥을 다시 잇는 여정</span></h1>
+        <p class="lead">신수와의 인연을 되찾을 때마다 세계도 조금씩 모습을 바꿉니다.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section-head"><p class="overline">HOW IT FLOWS · 여정의 흐름</p><h2>하나의 인연이 세계를 바꾸기까지</h2></div>
+<ol class="journey journey--compact">
+          <li class="j-step key"><div class="j-seal">壹</div><div class="j-body"><h3>봉인 해제<small>태허궁</small></h3><p>폐허가 된 태허궁에서 눈을 뜨고, 묘묘와 사운을 가장 먼저 만납니다.</p></div></li>
+          <li class="j-step"><div class="j-seal">貳</div><div class="j-body"><h3>신역 선택<small>순서 자유</small></h3>
+            <p>남은 네 신수 가운데 누구에게 먼저 갈지 직접 고릅니다. 먼저 만났다고 생기는 우열은 없습니다.</p>
+            <div class="branch branch--mini"><span><b>東</b>청야</span><span><b>西</b>사백</span><span><b>南</b>적련</span><span><b>北</b>설환</span></div></div></li>
+          <li class="j-step"><div class="j-seal">參</div><div class="j-body"><h3>인연 회복<small>대화와 사건</small></h3><p>신수가 외면해 온 상처와 오해를 함께 지나야 신뢰가 돌아옵니다.</p></div></li>
+          <li class="j-step"><div class="j-seal">肆</div><div class="j-body"><h3>권능 회귀 · 신위 상승<small>세계의 변화</small></h3><p>신수의 힘이 새 길을 열고, 신위가 오른 만큼 대진은 약해집니다. 그 균열을 따라 천경과 암운도 움직입니다.</p></div></li>
+          <li class="j-loop"><div class="j-seal">↻</div><p>다음 신역으로<small>남은 신수를 찾아 貳부터 다시 이어 갑니다.</small></p></li>
+          <li class="j-step j-final"><div class="j-seal">終</div><div class="j-body"><h3>최종장<small>회복 신수 5/5</small></h3><p>다섯 신수와 모두 다시 이어지면 대진이 무너지고, 가장 오래된 암운이 모습을 드러냅니다.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--tight" id="shadows">
+      <div class="shell">
+        <div class="section-head"><p class="overline">SHADOWS · 암운의 출현</p><h2>신위가 오를수록 드러나는 암운</h2><p>주신의 힘이 돌아올수록 봉인 너머의 존재들도 그 기척을 알아채고 하나씩 모습을 드러냅니다.</p></div>
+
+        <div class="shadow-track" aria-hidden="true">
+          <div class="st-bar"><span class="st-fill"></span></div>
+          <span class="st-mark" style="--at:20%"><b>20%</b></span>
+          <span class="st-mark" style="--at:40%"><b>40%</b></span>
+          <span class="st-mark" style="--at:60%"><b>60%</b></span>
+          <span class="st-mark hint" style="--at:80%"><b>80%</b></span>
+          <span class="st-mark final" style="--at:100%"><b>100%</b></span>
+          <span class="st-label st-0">신위 0%</span>
+        </div>
+
+        <ol class="shadow-list">
+          <li><span class="sh-at">신위 20%</span><h4>녹요<small>綠妖</small></h4><p>주신의 부활을 가장 먼저 눈치챈 정보상. 다른 암운의 존재를 처음으로 흘립니다.</p></li>
+          <li><span class="sh-at">신위 40%</span><h4>창혈<small>蒼血</small></h4><p>수호 신수에게 적의를 품은 이리 영물. 신수와의 관계에 직접 균열을 냅니다.</p></li>
+          <li><span class="sh-at">신위 60%</span><h4>유화<small>幽華</small></h4><p>환영과 거짓 기억으로 신수들의 상처를 흔들며, 위기를 본격적으로 키웁니다.</p></li>
+          <li class="final"><span class="sh-at">신위 100%</span><h4>황륜<small>黃輪</small></h4><p>고대 황룡이 직접 모습을 드러내며 최종장이 열립니다.</p></li>
+        </ol>
+        <p class="bond-note">신위가 아니더라도, 완전히 회복한 신수가 1 · 2 · 3 · 5명이 되는 순간 같은 순서로 나타납니다.</p>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="shell">
+        <div class="section-head"><p class="overline">FIVE POWERS · 다섯 권능</p><h2>다시 이어진 신수가 여는 길</h2></div>
+        <div class="bond-grid" id="bondGrid"></div>
+        <p class="bond-note">다시 이어진 신수는 여정에 함께하며, 누구와 함께하느냐에 따라 해법이 달라집니다. 여러 신수가 모이면 신경전이 벌어지기도 하지만 회복 순서에 따른 우열은 없습니다.</p>
+      </div>
+    </section>
+
+    <section class="section section--tight" id="status">
+      <div class="shell">
+        <div class="section-head"><p class="overline">RECORDS · 채팅 속 기록</p><h2>여정은 기록으로 남습니다</h2><p>매 응답 아래에는 현재 상황을 보여주는 상태창이 붙습니다. /여정기록과 /지도를 입력하면 이야기가 이어진 뒤, 그 장면까지 반영된 기록이나 지도가 상태창 위에 표시됩니다.</p></div>
+
+        <div class="rec-tabs" role="tablist" aria-label="기록 종류">
+          <button type="button" role="tab" aria-selected="true" data-rec="hud">상태창 · HUD<small>매 응답</small></button>
+          <button type="button" role="tab" aria-selected="false" data-rec="log">/여정기록<small>지나온 이야기</small></button>
+          <button type="button" role="tab" aria-selected="false" data-rec="map">/지도<small>세계와 현재 위치</small></button>
+        </div>
+
+        <div class="hud-showcase" data-recpane="hud">
+          <div class="hud-stage">
+            <div class="hud-sample-tabs" role="group" aria-label="예시 시점">
+              <button type="button" data-hud="start" aria-pressed="true">여정의 시작</button>
+              <button type="button" data-hud="mid" aria-pressed="false">여정 중반</button>
+            </div>
+            <div class="hud" id="hudSample"></div>
+          </div>
+          <ol class="hud-legend">
+            <li><b>날짜 · 시간 · 장소</b>지금 장면의 날씨와 날짜, 시간, 장소입니다.</li>
+            <li><b>곁에</b>지금 같은 자리에 있는 신수와 묘묘입니다. 타세력 인물은 이 줄에 표시되지 않습니다.</li>
+            <li><b>장면</b>방금 일어난 일.</li>
+            <li><b>목표</b>지금 이어 갈 수 있는 행동 하나.</li>
+            <li><b>신위 · 회복 신수 · 대진</b>신위는 신수들과 쌓은 신뢰의 합이고, 대진은 그만큼 약해집니다.</li>
+            <li><b>묘묘의 한 줄</b>냄새와 소리에 반응한 모습. 가끔 희미한 실마리가 됩니다.</li>
+            <li><b>인연 기록</b>눌러서 펼치면 신수별 감정·관계·신뢰도·권능과, 마주친 타세력 인물이 보입니다.</li>
+          </ol>
+        </div>
+
+        <div class="hud-showcase" data-recpane="log" hidden>
+          <div class="hud-stage">
+            <section class="jlog" id="journeyLog" aria-label="여정 기록 예시"></section>
+          </div>
+          <ul class="hud-legend plain">
+            <li><b class="c-gold">◉ 최근 사건</b>가장 최근 일부터 다섯 개까지.</li>
+            <li><b class="c-jade">◇ 발견한 단서</b>직접 보고 들은 것들.</li>
+            <li><b class="c-green">✓ 해결한 사건</b>마무리된 일들.</li>
+            <li><b class="c-red">… 남은 흔적</b>아직 풀리지 않은 이야기의 끈.</li>
+            <li class="note">채팅창에 /여정기록을 입력하면 상태창 위에 표시됩니다. 실제로 보고 들은 일을 정리하며, 남은 일과 단서를 살펴 다음 시도를 떠올릴 수 있습니다.</li>
+          </ul>
+        </div>
+        <div class="map-showcase" data-recpane="map" hidden>
+          <div class="wm-card"><header>◈ 세계 지도</header><div class="wm-stage"><img class="wm-art" src="https://i.imgur.com/aLyOklo.png" alt="세계 지도" loading="lazy"><button type="button" class="wm-owner at-home" data-map-region="center" aria-pressed="true" style="left:50%;top:48%" aria-label="태허궁 상세 보기"><img src="https://i.imgur.com/BDdqsu2.png" alt="" loading="lazy"><strong>태허궁</strong><small>사운 · 조우</small></button><button type="button" class="wm-owner " data-map-region="north" aria-pressed="false" style="left:52%;top:13%" aria-label="백야산·백사궁 상세 보기"><img src="https://i.imgur.com/wEfxzm9.png" alt="" loading="lazy"><strong>백야산·백사궁</strong><small>설환 · 미방문</small></button><button type="button" class="wm-owner " data-map-region="west" aria-pressed="false" style="left:17%;top:37%" aria-label="백호궁 상세 보기"><img src="https://i.imgur.com/jSejaXc.png" alt="" loading="lazy"><strong>백호궁</strong><small>사백 · 미방문</small></button><button type="button" class="wm-owner " data-map-region="east" aria-pressed="false" style="left:84%;top:48%" aria-label="창연·용연궁 상세 보기"><img src="https://i.imgur.com/DPED0PJ.png" alt="" loading="lazy"><strong>창연·용연궁</strong><small>청야 · 미방문</small></button><button type="button" class="wm-owner " data-map-region="south" aria-pressed="false" style="left:50%;top:79%" aria-label="주작궁·화림 상세 보기"><img src="https://i.imgur.com/OrjoEQ8.png" alt="" loading="lazy"><strong>주작궁·화림</strong><small>적련 · 미방문</small></button><button type="button" class="wm-owner " data-map-region="outer" aria-pressed="false" style="left:15%;top:78%" aria-label="천경 상세 보기"><span class="wm-gear">⚙️</span><strong>천경</strong><small>미방문</small></button><span class="wm-current" aria-label="나의 현재 위치: 태허궁">✦</span></div><details open class="wm-legend"><summary>범례</summary><p>✦ 나의 현재 위치<br>컬러 얼굴: 자기 영역에 있음<br>모노톤 얼굴: 영역을 비웠거나 위치 미확인</p></details><p class="wm-footnote">여정의 시작을 보여주는 예시입니다. 지역을 눌러 상세 화면을 살펴보세요.</p></div>
+          <div><section class="wm-detail" aria-label="지역 상세 화면 예시"><img id="mapDetailImage" src="https://i.imgur.com/6FIaAO8.png" alt="태허궁에서 사운과 조우한 모습" loading="lazy"><div class="wm-detail-body"><div class="wm-stages" id="mapStageButtons"><button type="button" data-map-stage="base" aria-pressed="false">기본</button><button type="button" data-map-stage="met" aria-pressed="true">조우</button><span aria-label="아직 열리지 않은 그림">🔒</span></div><h3 id="mapDetailTitle">태허궁</h3><p id="mapDetailOwner">수호 신수: 사운 · 조우</p><p id="mapDetailNote">눈을 뜬 폐허. 사운이 거리를 두고 낯익은 기척을 살핍니다.</p><div class="wm-rumor"><strong>민간 풍문</strong><p id="mapDetailRumor">“저 폐허엔 밤마다 사람 하나가 서 있다더라. 천 년째 같은 자리에서 한 번도 안 눕는다고.”</p><small>확인되지 않은 이야기입니다.</small></div></div></section>
+          <ul class="hud-legend plain wm-explanation"><li><b>/지도 · 세계와 현재 위치</b>지역의 위치와 주인, 내가 있는 곳을 확인할 수 있습니다. 실제 채팅에서는 지역을 누르면 상세 팝업이 열립니다.</li><li><b>얼굴은 영역의 주인</b>아직 만나지 않은 신수도 표시됩니다. 신수가 이동해도 얼굴 아이콘은 자기 영역에 남고, 곁에 있는 인물은 상태창에서 확인합니다.</li><li><b>진행에 따라 열리는 그림</b>신수를 만나고 회복이 진행되면 새 그림이 열립니다. 열린 그림은 다시 볼 수 있으며, 얼굴 색은 회복 단계와 별개입니다.</li></ul></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- 인물 상세 팝업 -->
+    <div class="modal-overlay" id="charModal" role="dialog" aria-modal="true" aria-labelledby="charModalName">
+    <div class="modal-card">
+      <button class="modal-close" id="charModalClose" type="button" aria-label="닫기">&times;</button>
+      <div class="modal-portrait">
+        <div class="portrait-placeholder" id="charModalPortrait"><span></span><small>초상 이미지 영역</small></div>
+        <p class="modal-record-no" id="charModalRecord"></p>
+      </div>
+      <div class="modal-body">
+        <div class="modal-identity"><div><p class="direction" id="charModalDirection"></p><h2 id="charModalName"></h2><p class="guardian-kind" id="charModalKind"></p></div><span class="profile-seal" id="charModalSeal">神</span></div>
+        <blockquote id="charModalQuote"></blockquote>
+        <p class="modal-summary" id="charModalSummary"></p>
+        <dl id="charModalDetails"></dl>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span>神緯錄 · 몰락한 신수들의 신</span>
+      <button type="button" id="toTop">맨 위로 ↑</button>
+    </div>
+  </footer>
+
+  <script>
+  /* ============================================================
+     데이터 — 용어 / 인물 / 신수 회복
+     ============================================================ */
+  var TERMS = [
+    { seal: '位', name: '신위', hj: '神位', desc: '주신이 세계와 이어져 권능을 쓸 수 있는 자격. 0%에서 시작해 신수와 가까워질수록 오릅니다.' },
+    { seal: '力', name: '신력', hj: '神力', desc: '주신이 품은 힘. 지금은 약 20%이고, 신위가 모자라면 온전히 쓰지 못합니다.' },
+    { seal: '脈', name: '신맥', hj: '神脈', desc: '주신과 신수를 잇던 힘의 흐름. 이것을 다시 잇는 것이 여정의 목표입니다.' },
+    { seal: '陣', name: '대진', hj: '大陣', desc: '주신을 가둔 인간의 거대한 결계. 신위가 오르는 만큼 약해집니다.' },
+    { seal: '機', name: '기공학', hj: '氣工學', desc: '신석과 신력을 엮어 쓰는 천경의 기술. 그들이 신력을 탐내는 이유입니다.' },
+    { seal: '濁', name: '탁기', hj: '濁氣', desc: '신맥이 끊긴 자리에 고인 탁한 기운. 주신의 손길이나 묘묘만 걷어 낼 수 있습니다.' }
+  ];
+
+  /* faction: guardian / empire / shadow
+     src — 목록 카드 위쪽 가로 이미지(9:4 표시, 기존 4:3 원본은 중앙부가 잘립니다). 예: src:'https://i.imgur.com/pxaYWYm.png'
+     detailSrc — 상세 팝업 이미지(3:4). 예: detailSrc:'https://i.imgur.com/QuHQ9kT.png'
+     detailSrc를 비우면 src를 함께 사용하고, 둘 다 비우면 자리표시가 나옵니다. */
+  var CHARACTERS = [
+    { key:'saun', faction:'guardian', place:'中央 · 태허궁', name:'사운', hj:'四雲', kind:'현무 · 폐허의 수호자', seal:'玄', record:'神獸記錄 · 01', src:'https://i.imgur.com/pxaYWYm.png', detailSrc:'https://i.imgur.com/QuHQ9kT.png',
+      summary:'폐허가 된 태허궁을 끝까지 지킨 수호자. 침묵과 통제 아래에는 주신을 다시 잃을지 모른다는 불안이 깊이 눌려 있습니다.',
+      details:[['소재지','주신이 각성한 중앙 태허궁의 무너진 신전'],['상태','수백 년 동안 홀로 폐허를 지키며 누적된 지독한 피로와 재손실에 대한 집착적 불안'],['첫 만남','각성 직후 낯선 기척을 감지하고 경계하며 다가옵니다. 당신임을 확신하지 못한 채 신력을 검증하려 합니다.']] },
+    { key:'cheongya', faction:'guardian', place:'東方 · 창연 / 용연궁', name:'청야', hj:'靑夜', kind:'청룡 · 심연의 지배자', seal:'靑', record:'神獸記錄 · 02', src:'https://i.imgur.com/GzSulz3.png', detailSrc:'https://i.imgur.com/wVqkrWj.png',
+      summary:'여의주를 빼앗긴 뒤 심연에 남은 청룡. 오만한 태도로 상대를 시험하지만, 그 밑바닥에는 결핍과 배신감이 웅크리고 있습니다.',
+      details:[['소재지','인간의 수탈로 오염되고 봉쇄된 동방의 심해 용연궁'],['상태','인간에게 여의주를 강탈당한 깊은 상처와 배신감, 오만함 뒤에 숨겨진 서늘한 결핍'],['첫 만남','고압적이고 차가운 태도로 당신의 자격과 진실성을 시험하며 심연 속으로 유인합니다.']] },
+    { key:'jeokryeon', faction:'guardian', place:'南方 · 주작궁 / 화림', name:'적련', hj:'赤蓮', kind:'주작 · 꺼지지 않는 불꽃', seal:'赤', record:'神獸記錄 · 03', src:'https://i.imgur.com/3yKw1lC.png', detailSrc:'https://i.imgur.com/vyZcfh2.png',
+      summary:'꺼지지 않는 신화에 스스로를 태우는 주작. 고통과 갈망을 분리하지 못한 채 주신의 손길만을 유일한 구원으로 여깁니다.',
+      details:[['소재지','제어되지 않는 신화로 재가 내리는 남방 화림 한가운데'],['상태','통제 불능의 불길로 스스로를 태우는 자학적 광기와 위태로운 갈증'],['첫 만남','신화 폭주 속에서 당신을 발견하자마자 구원자로서 타오르는 손길과 온기를 갈구합니다.']] },
+    { key:'sabaek', faction:'guardian', place:'西方 · 백호궁', name:'사백', hj:'沙白', kind:'백호 · 서방의 군주', seal:'白', record:'神獸記錄 · 04', src:'https://i.imgur.com/MmQrEZi.png', detailSrc:'https://i.imgur.com/q4SAcgr.png',
+      summary:'천경과 맞닿은 서방의 최전선을 지키는 군주. 지키지 못했다는 치욕을 힘과 전투로 증명하려는 거친 충성심을 품고 있습니다.',
+      details:[['소재지','인간 제국 천경과 맞닿은 최전선, 서방 백호궁 요새'],['상태','과거 주신을 지키지 못했다는 자책감과 치욕, 그것을 덮은 호전적인 야성미'],['첫 만남','반가움보다 사냥꾼의 날카로운 눈빛으로 당신의 힘과 위엄을 단단히 검증하려 합니다.']] },
+    { key:'seolhwan', faction:'guardian', place:'北方 · 백야산', name:'설환', hj:'雪煥', kind:'백사 · 설산의 은둔자', seal:'雪', record:'神獸記錄 · 05', src:'https://i.imgur.com/wDNcGmx.png', detailSrc:'https://i.imgur.com/0HcboOA.png',
+      summary:'끝없는 설산에서 홀로 얼어붙어 온 백사. 주신을 사랑 이전에 생존을 가능하게 하는 유일한 온기로 인식합니다.',
+      details:[['소재지','끝없는 눈보라와 시공간이 왜곡된 북방 백야산 정상의 산장'],['상태','체온조차 남지 않은 고립감 속에서 얼어붙어 가는 냉혈의 결핍'],['첫 만남','당신을 사랑이 아닌 생존을 가능하게 하는 유일한 \'온기\' 그 자체로 인식하고 똬리를 틀어 옵니다.']] },
+    { key:'myomyo', faction:'guardian', place:'수호 영물 · 길잡이', name:'묘묘', hj:'妙妙', kind:'묘선 · 액막이 영물', seal:'妙', record:'靈物記錄 · 01', src:'https://i.imgur.com/cMqO4zG.png', detailSrc:'https://i.imgur.com/as8FC8U.png',
+      summary:'봉인의 잔재인 탁기를 먹어 정화하는 작은 길잡이. 주신의 가장 가까운 곳을 자연스럽게 차지해 다른 신수들의 질투를 받습니다.',
+      details:[['역할','주신의 몸에 남은 봉인의 잔재(탁기)를 핥아먹고 정화하는 영물'],['특징','각성 직후 당신의 곁을 지키는 길잡이이자, 타 신수들의 강한 질투를 받는 존재']] },
+
+    { key:'seopjiun', faction:'empire', place:'天京 · 제국 중앙', name:'섭지운', hj:'葉智雲', kind:'천경 총수 · 냉철한 실용주의자', seal:'天', record:'天京記錄 · 01', src:'https://i.imgur.com/R77GJcy.png', detailSrc:'https://i.imgur.com/PR8O18b.png',
+      summary:'인간 문명의 완성을 위해 대진 재가동을 추진하는 천경의 총수. 주신을 숭배의 대상이 아니라 통제해야 할 거대한 힘으로 봅니다.',
+      details:[['나이','38세'],['권능과 장비','근묵파동을 다루며 대진 재가동 계획을 지휘합니다'],['핵심 성향','감정보다 제국의 존속과 효율을 앞세우는 냉정한 전략가']] },
+    { key:'jegaryeong', faction:'empire', place:'天京 · 중앙 기공원', name:'제갈영', hj:'諸葛永', kind:'수석 기공학자 · 광기 어린 연구자', seal:'機', record:'天京記錄 · 02', src:'https://i.imgur.com/y1l4lJk.png', detailSrc:'https://i.imgur.com/p0E2Iv1.png',
+      summary:'황동 고글과 추출 튜브를 달고 신력의 수치를 좇는 수석 기공학자. 신과 신수를 경외의 대상이 아닌 관찰하고 분해할 현상으로 여깁니다.',
+      details:[['나이','32세'],['전문','신력 추출 장치와 복구된 대진 회로를 연구합니다'],['핵심 성향','윤리보다 측정과 실험 결과를 우선하는 임상적인 탐구자']] },
+    { key:'yeonhwa', faction:'empire', place:'天京 · 연명 기공실', name:'연화', hj:'蓮花', kind:'변절한 전 대신관 · 강제 연명자', seal:'蓮', record:'天京記錄 · 03', src:'https://i.imgur.com/luNmBvl.png', detailSrc:'https://i.imgur.com/jg2sf8U.png',
+      summary:'오래전 신역을 섬겼으나 지금은 은빛 기공 튜브에 의지해 살아가는 변절자. 순진한 신앙이 부서진 뒤 스스로 천경에 신역의 지식을 넘겼습니다.',
+      details:[['나이','340세 · 기공 장치로 연명 중'],['과거','신역의 의식과 결계를 알던 대신관'],['핵심 성향','죄책감을 품고도 자신의 선택을 순수한 희생으로 포장하지 않습니다']] },
+    { key:'dojin', faction:'empire', place:'天京 · 신역 침공 전선', name:'도진', hj:'島眞', kind:'천경 수호대장 · 흑철의 무인', seal:'武', record:'天京記錄 · 04', src:'https://i.imgur.com/C3Bs8Ck.png', detailSrc:'https://i.imgur.com/PfJ122U.png',
+      summary:'흑철 중갑주와 주술 사슬 대검을 사용하는 천경의 수호대장. 봉인 시대를 직접 겪은 자가 아니라 오늘의 전장에서 살아남은 군인입니다.',
+      details:[['나이','36세'],['무장','흑철 중갑주와 주술 사슬 대검'],['핵심 성향','쾌락이나 명예보다 임무와 책임을 앞세우는 과묵한 무인']] },
+
+    { key:'hwangryun', faction:'shadow', place:'古代 · 흑금의 봉인', name:'황륜', hj:'黃輪', kind:'고대 황룡 · 암운의 군주', seal:'龍', record:'暗雲記錄 · 01', src:'https://i.imgur.com/6RN0Wxo.png', detailSrc:'https://i.imgur.com/n9FJvgL.png',
+      summary:'주신의 신위를 빼앗으려다 함께 봉인된 고대 황룡. 다시 깨어난 뒤에는 주신을 집어삼켜 자신이 유일한 신이 되려 합니다.',
+      details:[['정체','황금빛 용의 격을 지닌 고대의 지배자'],['권능','중력파동과 흑금 사슬을 다룹니다'],['핵심 욕망','주신을 하나의 인격이 아니라 왕좌를 완성할 전리품으로 여깁니다']] },
+    { key:'changhyeol', faction:'shadow', place:'古代 · 피 냄새를 좇는 사냥터', name:'창혈', hj:'蒼血', kind:'타락한 이리 영물 · 열등한 포식자', seal:'狼', record:'暗雲記錄 · 02', src:'https://i.imgur.com/M0flH42.png', detailSrc:'https://i.imgur.com/IJA6D36.png',
+      summary:'직계 수호 혈통에서 밀려난 방계 이리 영물. 자신을 배척한 격의 차이를 뒤집기 위해 주신의 피를 노립니다.',
+      details:[['외형','188cm의 거친 체격과 짐승의 문신'],['권능','이리 형상으로 변하며 사냥감에 표식을 남깁니다'],['핵심 욕망','열등감을 포식과 소유로 뒤집으려 합니다']] },
+    { key:'yuhwa', faction:'shadow', place:'古代 · 심해의 거울꽃', name:'유화', hj:'幽華', kind:'경어목 환화 요괴 · 몽환의 공작자', seal:'幻', record:'暗雲記錄 · 03', src:'https://i.imgur.com/cBbAFyE.png', detailSrc:'https://i.imgur.com/ndHuhQH.png',
+      summary:'심해 괴물의 눈에서 태어난 환화 요괴. 몽환안으로 거짓 기억과 환영을 비추며 신수의 상처와 질투를 부풀립니다.',
+      details:[['외형','176cm의 가느다란 체격과 깊은 바다를 닮은 눈'],['권능','몽환안과 거짓 환영으로 감각과 기억을 뒤틉니다'],['핵심 성향','타인의 파멸을 연출하면서도 그 고통에 스스로 흔들리는 모순']] },
+    { key:'nokyo', faction:'shadow', place:'古代 · 경계 없는 유랑길', name:'녹요', hj:'綠妖', kind:'유랑 도깨비 · 정보상과 암살자', seal:'火', record:'暗雲記錄 · 04', src:'https://i.imgur.com/vnLxcjG.png', detailSrc:'https://i.imgur.com/tBR58Zw.png',
+      summary:'도깨비의 유물을 훔쳐 청록 불꽃을 다루게 된 유랑자. 기공 도구와 정보를 거래하며 가장 이익이 되는 틈으로 파고듭니다.',
+      details:[['외형','181cm의 날렵한 체격과 청록 불꽃'],['권능','청록 불꽃과 훔친 기공 도구를 함께 사용합니다'],['핵심 성향','장난스러운 태도 아래 기회주의적인 소유욕을 숨깁니다']] }
+  ];
+
+  var BONDS = [
+    { where:'中央 · 태허궁', name:'사운', hj:'四雲', power:'결계', line:'태허궁을 안전한 거점으로 되살립니다.' },
+    { where:'東方 · 창연', name:'청야', hj:'靑夜', power:'수중 이동', line:'깊은 바다와 막힌 물길이 열립니다.' },
+    { where:'南方 · 주작궁', name:'적련', hj:'赤蓮', power:'오염 소각', line:'불길과 탁기가 뒤엉킨 곳을 뚫고 지나갑니다.' },
+    { where:'西方 · 백호궁', name:'사백', hj:'沙白', power:'군세', line:'백호궁의 군세와 함께 정면으로 돌파합니다.' },
+    { where:'北方 · 백야산', name:'설환', hj:'雪煥', power:'혹한 생존', line:'눈보라 속에서도 움직이고 숨은 길을 찾습니다.' }
+  ];
+
+  /* ============================================================
+     오프닝
+     ============================================================ */
+  (function () {
+    var screen = document.getElementById('openingScreen');
+    var root = document.documentElement;
+    if (root.classList.contains('skip-opening')) {
+      screen.remove(); document.body.classList.remove('gate-locked'); return;
+    }
+    var seal = document.getElementById('waxSeal');
+    var flap = document.getElementById('envFlap');
+    var flapShadow = document.getElementById('flapShadow');
+    var stage = document.getElementById('envelopeStage');
+    stage.addEventListener('animationend', function (event) {
+      if (event.animationName === 'envArrive') stage.style.animation = 'none';
+    });
+    var sheet = stage.querySelector('.env-sheet');
+    var finalBox = document.getElementById('letterFinal');
+    var enterBtn = document.getElementById('enterBtn');
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var wait = function (ms) { return new Promise(function (r) { setTimeout(r, reduce ? Math.min(ms, 60) : ms); }); };
+    var anim = function (el, kf, o) { return el.animate(kf, Object.assign({ fill: 'forwards', easing: 'cubic-bezier(.45,0,.25,1)' }, o)); };
+
+    // 떠다니는 금빛 먼지
+    var motes = screen.querySelector('.opening-motes');
+    for (var i = 0; i < 14; i++) {
+      var m = document.createElement('i');
+      m.style.left = (Math.random() * 100) + '%';
+      m.style.animationDuration = (9 + Math.random() * 9) + 's';
+      m.style.animationDelay = (-Math.random() * 18) + 's';
+      m.style.setProperty('--s', (2 + Math.random() * 3).toFixed(1) + 'px');
+      motes.appendChild(m);
+    }
+
+    // 불꽃 파티클
+    var cv = document.getElementById('openingFx'), cx = cv.getContext('2d'), sparks = [], running = true;
+    function fit() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; }
+    fit(); addEventListener('resize', fit);
+    function burst(x, y, n) {
+      var d = devicePixelRatio;
+      for (var k = 0; k < n; k++) {
+        var a = Math.random() * Math.PI * 2, s = (Math.random() * 5 + 1.2) * d;
+        sparks.push({ x: x * d, y: y * d, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 1.2 * d, l: 1, r: (Math.random() * 2 + .6) * d, c: Math.random() < .3 ? '190,70,55' : '255,222,160' });
+      }
+    }
+    (function loop() {
+      if (!running) return;
+      var d = devicePixelRatio; cx.clearRect(0, 0, cv.width, cv.height);
+      for (var k = sparks.length - 1; k >= 0; k--) {
+        var s = sparks[k]; s.x += s.vx; s.y += s.vy; s.vx *= .95; s.vy = s.vy * .95 + .05 * d; s.l -= .016;
+        if (s.l <= 0) { sparks.splice(k, 1); continue; }
+        cx.fillStyle = 'rgba(' + s.c + ',' + s.l + ')'; cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, 7); cx.fill();
+      }
+      requestAnimationFrame(loop);
+    })();
+    function shake() { screen.classList.remove('is-shaking'); void screen.offsetWidth; screen.classList.add('is-shaking'); }
+    setTimeout(function () { if (!opened) shake(); }, 1150); // 봉투가 내려앉는 순간
+
+    var opened = false;
+    async function openEnvelope() {
+      if (opened) return; opened = true;
+      screen.classList.add('is-opened');
+      try { sessionStorage.setItem('sinwirok-opened', '1'); } catch (e) {}
+
+      // 인장이 눌리고 갈라짐
+      seal.classList.add('is-pressed'); await wait(150); seal.classList.remove('is-pressed');
+      var r = seal.getBoundingClientRect();
+      seal.classList.add('is-broken'); burst(r.left + r.width / 2, r.top + r.height / 2, 80); shake();
+      await wait(180);
+
+      // 덮개: 살짝 들렸다가 앞으로 젖혀지며 열림
+      anim(flapShadow, [{ opacity: 1 }, { opacity: 0 }], { duration: 300 });
+      await anim(flap, [{ transform: 'rotateX(0deg)' }, { transform: 'rotateX(24deg)' }], { duration: 200, easing: 'cubic-bezier(.3,0,.4,1)' }).finished.catch(function () {});
+      anim(flap, [{ transform: 'rotateX(24deg)' }, { transform: 'rotateX(180deg)' }], { duration: 620, easing: 'cubic-bezier(.25,.6,.3,1)' });
+      await wait(230); flap.style.zIndex = 1;
+      await wait(420);
+
+      // 편지가 올라옴
+      anim(sheet, [{ transform: 'none' }, { transform: 'translateY(-64%)' }], { duration: 800, easing: 'cubic-bezier(.3,.7,.2,1)' });
+      await wait(900);
+
+      // 서신으로 전환 → 다 읽을 즈음 버튼 등장
+      anim(stage, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(70px) scale(.96)' }], { duration: 600 });
+      await wait(250);
+      finalBox.hidden = false;
+      await wait(350);
+      // 봉투가 사라진 뒤에는 서신을 일반 흐름으로 바꿔, 화면이 낮으면 스크롤로 버튼까지 닿게 한다
+      stage.hidden = true;
+      finalBox.classList.add('is-settled');
+      screen.classList.add('is-reading');
+      await wait(1650);
+      enterBtn.classList.add('is-visible');
+      enterBtn.focus({ preventScroll: true });
+    }
+    function enterSite() {
+      enterBtn.disabled = true;
+      anim(screen, [{ opacity: 1, filter: 'none' }, { opacity: 0, filter: 'blur(6px) brightness(1.3)' }], { duration: 800, easing: 'ease' });
+      document.body.classList.remove('gate-locked');
+      setTimeout(function () { running = false; screen.remove(); cv.remove(); }, 820);
+    }
+    screen.addEventListener('click', function (e) { if (e.target.closest('#enterBtn')) return; openEnvelope(); });
+    enterBtn.addEventListener('click', enterSite);
+    document.addEventListener('keydown', function (e) {
+      if (!opened && screen.isConnected && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openEnvelope(); }
+    });
+  })();
+
+  /* ============================================================
+     탭 전환
+     ============================================================ */
+  var TITLES = { lore: '세계관', characters: '인물록', journey: '여정 안내' };
+  function switchTab(target) {
+    document.querySelectorAll('.tab-view').forEach(function (v) { v.hidden = v.id !== 'view-' + target; });
+    document.querySelectorAll('.main-tabs [role="tab"]').forEach(function (t) { t.setAttribute('aria-selected', t.dataset.tab === target ? 'true' : 'false'); });
+    document.title = '신위록 神緯錄 | ' + TITLES[target];
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    try { history.replaceState(null, '', '#' + target); } catch (e) {}
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-tab]');
+    if (t) { e.preventDefault(); switchTab(t.dataset.tab); }
+  });
+  if (TITLES[location.hash.slice(1)]) switchTab(location.hash.slice(1));
+  document.getElementById('toTop').addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  /* BGM */
+  var bgm = document.getElementById('bgm'), bgmBtn = document.getElementById('bgmToggleBtn');
+  bgmBtn.addEventListener('click', function () {
+    if (bgm.paused) { bgm.volume = 0.4; bgm.play().catch(function () {}); bgmBtn.textContent = '♪ BGM ON'; bgmBtn.classList.remove('off'); }
+    else { bgm.pause(); bgmBtn.textContent = '♪ BGM OFF'; bgmBtn.classList.add('off'); }
+  });
+
+  /* ============================================================
+     핵심 용어
+     ============================================================ */
+  document.getElementById('termCards').innerHTML = TERMS.map(function (t) {
+    return '<article class="term-card"><span class="term-seal" aria-hidden="true">' + t.seal + '</span>' +
+      '<div><h3 class="term-name">' + t.name + '<span class="hj">' + t.hj + '</span></h3><p>' + t.desc + '</p></div></article>';
+  }).join('');
+
+  /* ============================================================
+     인물록 — 목록 생성, 세력 필터, 상세 팝업
+     ============================================================ */
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  ['guardian', 'empire', 'shadow'].forEach(function (f) {
+    var list = CHARACTERS.filter(function (c) { return c.faction === f; });
+    document.querySelector('[data-count="' + f + '"]').textContent = list.length;
+    document.querySelector('[data-list="' + f + '"]').innerHTML = list.map(function (c) {
+      var portrait = c.src ? '<img src="' + esc(c.src) + '" alt="' + esc(c.name) + ' 초상" loading="lazy">'
+        : '<div class="portrait-placeholder"><span>' + c.name + ' 초상</span><small>초상 이미지 영역</small></div>';
+      return '<article class="guardian" data-char="' + c.key + '" tabindex="0" role="button" aria-haspopup="dialog">' +
+        '<div class="portrait">' + portrait + '</div>' +
+        '<div class="guardian-copy"><h2>' + c.name + ' <small>' + c.hj + '</small></h2>' +
+        '<p class="guardian-kind">' + c.kind + '</p>' +
+        '<blockquote data-quote-key="' + c.key + '">대사를 불러오는 중입니다.</blockquote><span class="more-link">전체 기록 보기</span></div></article>';
+    }).join('');
+  });
+  document.querySelector('[data-count="all"]').textContent = CHARACTERS.length;
+
+  // 대사의 유일한 원본: 같은 폴더의 characters.html 안의 blockquote.
+  // DOMParser로 텍스트만 읽으며 인물록 파일의 스크립트는 실행하지 않습니다.
+  var quoteStatus = '대사를 불러오는 중입니다.';
+  function refreshQuotes() {
+    document.querySelectorAll('[data-quote-key]').forEach(function (node) {
+      var character = CHARACTERS.find(function (c) { return c.key === node.dataset.quoteKey; });
+      node.textContent = character && character.quote ? character.quote : quoteStatus;
+    });
+  }
+  fetch('./characters.html', { cache: 'no-store' })
+    .then(function (response) {
+      if (!response.ok) throw new Error('인물록 응답: ' + response.status);
+      return response.text();
+    })
+    .then(function (html) {
+      var source = new DOMParser().parseFromString(html, 'text/html');
+      var quotes = CHARACTERS.map(function (c) {
+        var nodes = source.querySelectorAll('[data-character-quote="' + c.key + '"]');
+        if (nodes.length !== 1 || !nodes[0].textContent.trim()) {
+          throw new Error('인물록 대사 확인 필요: ' + c.key);
+        }
+        return nodes[0].textContent.trim();
+      });
+      CHARACTERS.forEach(function (c, i) { c.quote = quotes[i]; });
+      refreshQuotes();
+    })
+    .catch(function (error) {
+      quoteStatus = '대사를 불러오지 못했습니다. 인물록 파일을 확인하고 새로고침해 주세요.';
+      refreshQuotes();
+      console.warn('인물록 대사 로드 실패. 두 HTML을 같은 웹서버 폴더에 두세요.', error);
+    });
+
+  document.querySelectorAll('.filter-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var f = btn.dataset.filter;
+      document.querySelectorAll('.filter-btn').forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      document.querySelectorAll('.faction-block').forEach(function (sec) {
+        var show = f === 'all' || sec.dataset.faction === f;
+        sec.hidden = !show;
+        sec.classList.remove('is-entering'); if (show) { void sec.offsetWidth; sec.classList.add('is-entering'); }
+      });
+      var bar = document.querySelector('.filter-bar');
+      var y = bar.getBoundingClientRect().top + window.scrollY - 68;
+      if (window.scrollY > y) window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+
+  var modal = document.getElementById('charModal'), lastFocus = null;
+  function openChar(key) {
+    var c = CHARACTERS.find(function (x) { return x.key === key; }); if (!c) return;
+    document.getElementById('charModalName').innerHTML = c.name + ' <small>' + c.hj + '</small>';
+    document.getElementById('charModalKind').textContent = c.kind;
+    document.getElementById('charModalDirection').textContent = c.place;
+    document.getElementById('charModalQuote').dataset.quoteKey = c.key;
+    document.getElementById('charModalQuote').textContent = c.quote || quoteStatus;
+    document.getElementById('charModalSummary').textContent = c.summary;
+    document.getElementById('charModalRecord').textContent = c.record;
+    document.getElementById('charModalSeal').textContent = c.seal;
+    var p = document.getElementById('charModalPortrait');
+    var detailSrc = c.detailSrc || c.src;
+    p.classList.toggle('has-img', !!detailSrc);
+    p.innerHTML = detailSrc ? '<img src="' + esc(detailSrc) + '" alt="' + esc(c.name) + ' 초상">' : '<span>' + c.name + ' 초상</span><small>초상 이미지 영역</small>';
+    document.getElementById('charModalDetails').innerHTML = c.details.map(function (d) { return '<div><dt>' + d[0] + '</dt><dd>' + esc(d[1]) + '</dd></div>'; }).join('');
+    lastFocus = document.activeElement;
+    modal.classList.add('active'); document.body.style.overflow = 'hidden';
+    document.getElementById('charModalClose').focus();
+  }
+  function closeChar() { modal.classList.remove('active'); document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+  document.addEventListener('click', function (e) { var card = e.target.closest('[data-char]'); if (card) openChar(card.dataset.char); });
+  document.addEventListener('keydown', function (e) {
+    var card = e.target.closest && e.target.closest('[data-char]');
+    if (card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openChar(card.dataset.char); }
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeChar();
+  });
+  document.getElementById('charModalClose').addEventListener('click', closeChar);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeChar(); });
+
+  /* ============================================================
+     여정 안내 — 신수별 회복 카드
+     ============================================================ */
+  document.getElementById('bondGrid').innerHTML = BONDS.map(function (b) {
+    return '<article class="bond-card"><span class="where">' + b.where + '</span><h4>' + b.name + '<small>' + b.hj + '</small></h4>' +
+      '<div class="power"><b>' + b.power + '</b>' + b.line + '</div></article>';
+  }).join('');
+
+  /* ============================================================
+     여정 안내 — 신위 기록(HUD) · 여정 기록 예시
+     ============================================================ */
+  var EMOJI = { 사운:'🐢', 청야:'💧', 적련:'🔥', 사백:'🐯', 설환:'🐍', 묘묘:'🐱', 섭지운:'👑', 제갈영:'🔬', 연화:'⚙️', 도진:'🗡', 황륜:'🐲', 창혈:'🐺', 유화:'🐟', 녹요:'👻' };
+  var BEAST_ORDER = [['saun','사운','결계'],['cheongya','청야','수중 이동'],['jeokryeon','적련','오염 소각'],['sabaek','사백','군세'],['seolhwan','설환','혹한 생존']];
+  var HUD_SAMPLES = {
+    start: {
+      weather:'🌙', date:'3021년 1월 7일', time:'21:00', nearby:['사운','묘묘'], location:'태허궁 대진 중앙',
+      summary:'대진에 균열이 생기고, 사운이 거리를 두며 낯익은 기척을 경계한다.',
+      objective:'사운과 첫 대화 나누기',
+      power:0, recovered:0, barrier:100,
+      myomyo:'묘묘: 기둥 아래에서 하품한다. 황동 방울이 흔들린다.',
+      beasts:{ saun:{t:0,met:true,e:'🤨',r:'확인할 존재'} },
+      others:[]
+    },
+    mid: {
+      weather:'☁️', date:'3021년 4월 8일', time:'16:20', nearby:['사운','사백','묘묘'], location:'백호궁 서문',
+      summary:'천경의 정찰대를 물리친 뒤, 사백이 처음으로 주신에게 등을 맡긴다.',
+      objective:'성벽 아래 남은 기공 장치의 흔적 확인하기',
+      power:40, recovered:1, barrier:60,
+      myomyo:'성벽 틈에 코를 박고 킁킁거린다. 꼬리가 바닥을 두 번 친다.',
+      beasts:{ saun:{t:20,met:true,e:'🙂',r:'다시 섬길 주신'}, cheongya:{t:8,met:true,e:'😒',r:'믿기 힘든 주인'}, sabaek:{t:12,met:true,e:'😤',r:'인정한 주군'} },
+      others:[{n:'섭지운',e:'🧐',r:'통제할 신격',f:'천경'},{n:'녹요',e:'😏',r:'값비싼 손님',f:'암운'}]
+    }
+  };
+  function renderHud(d) {
+    var el = document.getElementById('hudSample');
+    var rows = BEAST_ORDER.map(function (b) {
+      var x = d.beasts[b[0]] || { t:0, met:false };
+      var pct = Math.min(20, Math.max(0, x.t)) * 5, done = x.t >= 20, met = x.met || x.t > 0;
+      return '<div class="hud-row' + (done ? ' done' : '') + '"><span class="who"><i>' + EMOJI[b[1]] + '</i>' + b[1] + '</span>' +
+        '<span class="rel' + (met ? '' : ' locked') + '"><i>' + (met ? x.e : '🔒') + '</i><em>·</em>' + (met ? x.r : '만나지 않음') + '</span>' +
+        '<strong>' + pct + '%</strong><span class="pow"><i>' + (done ? '✓' : '🔒') + '</i>' + b[2] + '</span></div>';
+    }).join('');
+    var others = d.others.length ? d.others.map(function (o) {
+      return '<div class="hud-row other"><span class="who"><i>' + (EMOJI[o.n] || '◆') + '</i>' + o.n + '</span><span class="rel"><i>' + o.e + '</i><em>·</em>' + o.r + '</span>' +
+        '<span class="fac' + (o.f === '암운' ? ' dark' : '') + '">' + o.f + '</span></div>';
+    }).join('') : '<div class="hud-empty">아직 기록된 타세력 인연이 없습니다.</div>';
+    el.innerHTML =
+      '<div class="hud-meta"><span>' + d.weather + '</span><em>·</em><span>' + d.date + '</span><em>·</em><span>' + d.time + '</span><em>·</em><span>' + d.location + '</span></div>' +
+      '<div class="hud-nearby"><small>곁에</small><span>' + d.nearby.join(' · ') + '</span></div>' +
+      '<div class="hud-summary">' + d.summary + '</div>' +
+      '<div class="hud-goal"><strong>목표</strong><span>' + d.objective + '</span></div>' +
+      '<div class="hud-stats"><span class="pw">신위 ' + d.power + '%</span><em>|</em><span>회복 신수 ' + d.recovered + '/5</span><em>|</em><span>대진 ' + d.barrier + '%</span></div>' +
+      '<div class="hud-myo"><span>🐾</span><span>' + d.myomyo + '</span></div>' +
+      '<details class="hud-rel"><summary>인연 기록</summary>' +
+        '<div class="hud-tabs"><button type="button" class="on" data-rt="beasts">신수 · 권능</button><button type="button" data-rt="others">타세력</button></div>' +
+        '<div class="hud-list" data-rl="beasts">' + rows + '</div><div class="hud-list" data-rl="others" hidden>' + others + '</div>' +
+      '</details>';
+    el.querySelectorAll('.hud-tabs button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        el.querySelectorAll('.hud-tabs button').forEach(function (x) { x.classList.toggle('on', x === btn); });
+        el.querySelectorAll('.hud-list').forEach(function (l) { l.hidden = l.dataset.rl !== btn.dataset.rt; });
+      });
+    });
+  }
+  var hudOpen = false;
+  document.querySelectorAll('[data-hud]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var det = document.querySelector('#hudSample details'); hudOpen = det && det.open;
+      document.querySelectorAll('[data-hud]').forEach(function (x) { x.setAttribute('aria-pressed', x === btn ? 'true' : 'false'); });
+      renderHud(HUD_SAMPLES[btn.dataset.hud]);
+      if (hudOpen) document.querySelector('#hudSample details').open = true;
+    });
+  });
+  renderHud(HUD_SAMPLES.start);
+  document.querySelectorAll('[data-rec]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('[data-rec]').forEach(function (x) { x.setAttribute('aria-selected', x === btn ? 'true' : 'false'); });
+      document.querySelectorAll('[data-recpane]').forEach(function (p) { p.hidden = p.dataset.recpane !== btn.dataset.rec; });
+    });
+  });
+
+  var LOG = {
+    date:'대진력 3021년 4월', region:'백호궁',
+    sections: [
+      ['recent','◉','최근 사건','c-gold',[
+        ['백호궁 서문의 정찰대','백호궁 · 4월','사백과 함께 천경의 정찰대를 물리쳤다. 사백이 처음으로 등을 맡겼다.'],
+        ['창연에서 온 전언','태허궁 · 3월','청야가 짧은 전언만 남기고 모습을 감췄다.'],
+        ['태허궁의 결계','태허궁 · 2월','사운이 다시 결계를 펼쳐 태허궁이 쉴 곳이 되었다.']], true],
+      ['clues','◇','발견한 단서','c-jade',[
+        ['기공 장치의 파편','백호궁 서문','정찰대가 남긴 장치에서 신력이 빠져나간 흔적이 보인다.']]],
+      ['resolved','✓','해결한 사건','c-green',[
+        ['사운과의 재회','태허궁 · 1월','']]],
+      ['unresolved','…','남은 흔적','c-red',[
+        ['청록빛 불씨','백호궁 성벽','불탄 자리에서 청록빛 재가 발견되었다. 누구의 것인지는 알 수 없다.']]]
+    ]
+  };
+  document.getElementById('journeyLog').innerHTML =
+    '<header class="jlog-head"><div><span class="c-gold">▣</span><strong>여정 기록</strong><span class="jlog-region">' + LOG.region + '</span></div><p>' + LOG.date + '</p></header>' +
+    LOG.sections.map(function (sec) {
+      return '<details' + (sec[5] ? ' open' : '') + '><summary><i class="' + sec[3] + '">' + sec[1] + '</i><span>' + sec[2] + '</span><em>' + sec[4].length + '</em></summary><div class="jlog-list">' +
+        sec[4].map(function (e) {
+          return '<div class="jlog-item"><span class="dot ' + sec[3] + '"></span><div><div class="jt"><strong>' + e[0] + '</strong><small>' + e[1] + '</small></div>' + (e[2] ? '<p>' + e[2] + '</p>' : '') + '</div></div>';
+        }).join('') + '</div></details>';
+    }).join('');
+  </script>
+
+<script>
+(function(){
+ const data={"center": {"name": "태허궁", "owner": "사운", "image": "6FIaAO8", "base": "rhpJUjS"}, "north": {"name": "백야산·백사궁", "owner": "설환", "image": "hqeK3xk", "base": "hqeK3xk"}, "west": {"name": "백호궁", "owner": "사백", "image": "eweK4W5", "base": "eweK4W5"}, "east": {"name": "창연·용연궁", "owner": "청야", "image": "3DwkQLT", "base": "3DwkQLT"}, "south": {"name": "주작궁·화림", "owner": "적련", "image": "P6WnmhI", "base": "P6WnmhI"}, "outer": {"name": "천경", "owner": "", "image": "8lyPKGp", "base": "8lyPKGp"}}; let selected='center';
+ const image=document.getElementById('mapDetailImage');
+ function show(id){selected=id;const d=data[id];document.querySelectorAll('[data-map-region]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mapRegion===id)));image.src='https://i.imgur.com/'+d.image+'.png';image.alt=d.name+' '+(id==='center'?'조우':'기본 풍경');document.getElementById('mapDetailTitle').textContent=d.name;document.getElementById('mapDetailOwner').textContent=d.owner?'수호 신수: '+d.owner+' · '+(id==='center'?'조우':'아직 만나지 못함'):'기공학의 제국 · 미방문';document.getElementById('mapDetailNote').textContent=id==='center'?'눈을 뜬 폐허. 사운이 거리를 두고 낯익은 기척을 살핍니다.':'아직 방문하지 않은 지역입니다.';document.getElementById('mapStageButtons').hidden=id!=='center';document.querySelector('.wm-rumor').hidden=id!=='center';document.querySelectorAll('[data-map-stage]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mapStage==='met')));}
+ document.querySelectorAll('[data-map-region]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.mapRegion)));
+ document.querySelectorAll('[data-map-stage]').forEach(b=>b.addEventListener('click',()=>{if(selected!=='center')return;image.src='https://i.imgur.com/'+data.center[b.dataset.mapStage==='base'?'base':'image']+'.png';image.alt='태허궁 '+(b.dataset.mapStage==='base'?'기본 풍경':'사운 조우');document.querySelectorAll('[data-map-stage]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));}));
+})();
+</script>
+</body>
+</html>
