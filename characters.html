@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090c0b">
+  <meta name="description" content="신위록 주요 인물 및 세력 기록">
+  <title>신위록 神緯錄 | 인물 기록부</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- SUNO BGM 오디오 태그 -->
+  <audio id="bgm" src="assets/audio/bgm.mp3" loop preload="auto"></audio>
+
+  <!-- 상단 네비게이션 -->
+  <header class="topbar">
+    <div class="shell bar-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">神</span><strong>신위록</strong></a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="index.html">세계관 소개</a>
+        <a href="#guardians">수호 신수</a>
+        <a href="#empire">천경 기공학 연합</a>
+        <a href="#shadow">기억 저편의 암운</a>
+        <a href="#inhabitants">세계의 잔영</a>
+      </nav>
+
+      <!-- BGM 토글 버튼 -->
+      <button id="bgmToggleBtn" class="bgm-btn off" type="button" aria-label="음악 켜기/끄기">
+        🎵 BGM PLAY
+      </button>
+
+      <a class="character-link" href="index.html">세계관으로 돌아가기</a>
+    </div>
+  </header>
+
+  <!-- 대사 수정: 아래 data-character-quote가 붙은 blockquote의 내용만 수정하세요.
+       index.html 카드와 상세창에서도 이 내용을 그대로 불러옵니다. 파일명은 유지하세요. -->
+  <main>
+    <section class="character-hero">
+      <div class="shell">
+        <p class="overline">INHABITANTS & GUARDIANS · 인물 기록부</p>
+        <h1>세계의 왕좌를 둘러싼<br>기록된 이들과 가려진 운명</h1>
+        <p>오랜 단절 속에서 무너진 수호자들과 신력을 노리는 인간 제국, 그림자 너머에서 움직이기 시작한 존재들의 기록이다.</p>
+      </div>
+    </section>
+
+    <!-- [1] 수호 신수 진영 (주신 제외 6인) -->
+    <section class="guardian-list" id="guardians">
+      <div class="shell">
+        <div class="faction-header">
+          <p class="overline">FACTION 01</p>
+          <h2>수호 신수 진영</h2>
+          <p>오랜 단절 끝에 각자의 결핍과 상처 속에서 주신을 기다려온 수호자들.</p>
+        </div>
+
+        <!-- 사운 -->
+        <article class="guardian saun">
+          <div class="portrait">
+            <img src="https://i.imgur.com/QuHQ9kT.png" alt="사운 상세 초상" loading="lazy">
+          </div>
+          <div class="guardian-copy">
+            <p class="direction">中央 · 태허궁</p>
+            <h2>사운 <small>四雲</small></h2>
+            <p class="guardian-kind">현무 · 폐허의 수호자</p>
+            <blockquote data-character-quote="saun">"…돌아오셨군요... 다시는 제 곁을, 벗어나지 마십시오."</blockquote>
+            <dl>
+              <div><dt>소재지</dt><dd>주신이 각성한 중앙 태허궁의 무너진 신전</dd></div>
+              <div><dt>상태</dt><dd>수백 년 동안 홀로 폐허를 지키며 누적된 지독한 피로와 재손실에 대한 집착적 불안</dd></div>
+              <div><dt>첫 만남</dt><dd>각성 직후 낯선 기척을 감지하고 경계하며 접근. 당신임을 확신하지 못한 채 신력을 검증하려 함.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <!-- 청야 -->
+        <article class="guardian cheongya reverse">
+          <div class="portrait">
+            <img src="https://i.imgur.com/wVqkrWj.png" alt="청야 상세 초상" loading="lazy">
+          </div>
+          <div class="guardian-copy">
+            <p class="direction">東方 · 창연 / 용연궁</p>
+            <h2>청야 <small>靑夜</small></h2>
+            <p class="guardian-kind">청룡 · 심연의 지배자</p>
+            <blockquote data-character-quote="cheongya">"여의주를 빼앗긴 용이 얼마나 비틀리는지 보셨습니까? 그러니 이번엔... 주신께서 저를 채워주십시오."</blockquote>
+            <dl>
+              <div><dt>소재지</dt><dd>인간의 수탈로 오염되고 봉쇄된 동방의 심해 용연궁</dd></div>
+              <div><dt>상태</dt><dd>인간에게 여의주를 강탈당한 깊은 상처와 배신감, 오만함 뒤에 숨겨진 서늘한 결핍</dd></div>
+              <div><dt>첫 만남</dt><dd>고압적이고 차가운 태도로 당신의 자격과 진실성을 시험하며 심연 속으로 유인함.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <!-- 적련 -->
+        <article class="guardian jeokryeon">
+          <div class="portrait">
+            <img src="https://i.imgur.com/vyZcfh2.png" alt="적련 상세 초상" loading="lazy">
+          </div>
+          <div class="guardian-copy">
+            <p class="direction">南方 · 주작궁 / 화림</p>
+            <h2>적련 <small>赤蓮</small></h2>
+            <p class="guardian-kind">주작 · 꺼지지 않는 불꽃</p>
+            <blockquote data-character-quote="jeokryeon">"제 불꽃이 몸을 태워도 상관없습니다. 주신의 손길이 닿을 수만 있다면... 잿더미가 되어도 좋습니다."</blockquote>
+            <dl>
+              <div><dt>소재지</dt><dd>제어되지 않는 신화로 재가 내리는 남방 화림 한가운데</dd></div>
+              <div><dt>상태</dt><dd>통제 불능의 불길로 스스로를 태우는 자학적 광기와 위태로운 갈증</dd></div>
+              <div><dt>첫 만남</dt><dd>신화 폭주 속에서 당신을 발견하자마자 구원자로서 타오르는 손길과 온기를 갈구함.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <!-- 사백 -->
+        <article class="guardian sabaek reverse">
+          <div class="portrait">
+            <img src="https://i.imgur.com/q4SAcgr.png" alt="사백 상세 초상" loading="lazy">
+          </div>
+          <div class="guardian-copy">
+            <p class="direction">西方 · 백호궁</p>
+            <h2>사백 <small>沙白</small></h2>
+            <p class="guardian-kind">백호 · 서방의 군주</p>
+            <blockquote data-character-quote="sabaek">"당신을 봉인에서 지키지 못했던 치욕... 천경 놈들의 피로 씻어내고, 영원히 내 품에 묶어둘 것이다."</blockquote>
+            <dl>
+              <div><dt>소재지</dt><dd>인간 제국 천경과 맞닿은 최전선, 서방 백호궁 요새</dd></div>
+              <div><dt>상태</dt><dd>과거 주신을 지키지 못했다는 자책감과 치욕을 호전적인 야성미로 가림</dd></div>
+              <div><dt>첫 만남</dt><dd>반가움보다 사냥꾼의 날카로운 눈빛으로 당신의 힘과 위엄을 단단히 검증하려 함.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <!-- 설환 -->
+        <article class="guardian seolhwan">
+          <div class="portrait">
+            <img src="https://i.imgur.com/0HcboOA.png" alt="설환 상세 초상" loading="lazy">
+          </div>
+          <div class="guardian-copy">
+            <p class="direction">北方 · 백야산</p>
+            <h2>설환 <small>雪煥</small></h2>
+            <p class="guardian-kind">백사 · 설산의 은둔자</p>
+            <blockquote data-character-quote="seolhwan">"저는 차갑습니다. 온기가 필요해요. 주신의 체온이 끊어지면... 온 세상을 얼려버릴지도 모릅니다."</blockquote>
+            <dl>
+              <div><dt>소재지</dt><dd>끝없는 눈보라와 시공간이 왜곡된 북방 백야산 정상의 산장</dd></div>
+              <div><dt>상태</dt><dd>체온조차 남지 않은 고립감 속에서 얼어붙어 가는 냉혈의 결핍</dd></div>
+              <div><dt>첫 만남</dt><dd>당신을 사랑이 아닌 생존을 가능하게 하는 유일한 '온기' 그 자체로 인식하고 똬리를 틀어옴.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <!-- 묘묘 -->
+        <article class="guardian myomyo reverse">
+          <div class="portrait">
+            <img src="https://i.imgur.com/as8FC8U.png" alt="묘묘 상세 초상" loading="lazy">
+          </div>
+          <div class="guardian-copy">
+            <p class="direction">수호 영물 · 길잡이</p>
+            <h2>묘묘 <small>妙妙</small></h2>
+            <p class="guardian-kind">묘선 · 액막이 영물</p>
+            <blockquote data-character-quote="myomyo">"주신님, 묘묘가 몸에 남아있는 차가운 탁기를 깨끗하게 핥아드릴게요!"</blockquote>
+            <dl>
+              <div><dt>역할</dt><dd>주신의 몸에 남은 봉인의 잔재와 탁기 핥아먹고 정화하는 영물</dd></div>
+              <div><dt>특징</dt><dd>각성 직후 당신의 곁을 지키는 길잡이이자, 타 신수들의 강한 질투를 받는 존재</dd></div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="guardian-list enemy-section" id="empire">
+      <div class="shell">
+        <div class="faction-header">
+          <p class="overline">FACTION 02</p>
+          <h2>천경 기공학 연합</h2>
+          <p>신력을 문명의 자원으로 바꾸고 대진을 다시 움직이려는 인간 제국의 핵심 인물들이다.</p>
+        </div>
+        <article class="guardian"><div class="portrait"><img src="https://i.imgur.com/PR8O18b.png" alt="섭지운 상세 초상" loading="lazy"></div><div class="guardian-copy"><p class="direction">天京 · 제국 중앙</p><h2>섭지운 <small>葉智雲</small></h2><p class="guardian-kind">천경 총수 · 냉철한 실용주의자</p><blockquote data-character-quote="seopjiun">“이 세계를 움직인 것은 신의 자비가 아니라 인간의 피와 땀, 이 강철 톱니바퀴였지요.”</blockquote><dl><div><dt>인물</dt><dd>인간 문명의 완성을 위해 대진 재가동을 추진하는 천경의 총수다.</dd></div><div><dt>권능</dt><dd>근묵파동을 다루며 제국의 대진 계획을 지휘한다.</dd></div></dl></div></article>
+        <article class="guardian reverse"><div class="portrait"><img src="https://i.imgur.com/p0E2Iv1.png" alt="제갈영 상세 초상" loading="lazy"></div><div class="guardian-copy"><p class="direction">天京 · 중앙 기공원</p><h2>제갈영 <small>諸葛永</small></h2><p class="guardian-kind">수석 기공학자 · 광기 어린 연구자</p><blockquote data-character-quote="jegaryeong">“크하하...... 마침내 눈을 뜨셨군요, 나의 '주신 표본'이시여!”</blockquote><dl><div><dt>인물</dt><dd>신과 신수를 관찰하고 분해할 현상으로 바라보는 연구자다.</dd></div><div><dt>전문</dt><dd>황동 고글과 추출 튜브로 신력과 대진 회로를 측정한다.</dd></div></dl></div></article>
+        <article class="guardian"><div class="portrait"><img src="https://i.imgur.com/jg2sf8U.png" alt="연화 상세 초상" loading="lazy"></div><div class="guardian-copy"><p class="direction">天京 · 연명 기공실</p><h2>연화 <small>蓮花</small></h2><p class="guardian-kind">변절한 전 대신관 · 강제 연명자</p><blockquote data-character-quote="yeonhwa">“나를 가엾게 보지 마십시오…… 이 배신은 누구의 강요도 아닌 제 선택이었으니.”</blockquote><dl><div><dt>인물</dt><dd>은빛 기공 튜브에 의지해 살아가는 옛 대신관이다.</dd></div><div><dt>과거</dt><dd>부서진 신앙 끝에 스스로 천경에 신역의 지식을 넘겼다.</dd></div></dl></div></article>
+        <article class="guardian reverse"><div class="portrait"><img src="https://i.imgur.com/PfJ122U.png" alt="도진 상세 초상" loading="lazy"></div><div class="guardian-copy"><p class="direction">天京 · 신역 침공 전선</p><h2>도진 <small>島眞</small></h2><p class="guardian-kind">천경 수호대장 · 흑철의 무인</p><blockquote data-character-quote="dojin">“이 흑철 갑주와 대검을 뚫지 못한다면, 신수라 해도 제 뒤로는 갈 수 없습니다.”</blockquote><dl><div><dt>인물</dt><dd>오늘의 전장에서 살아남은 과묵한 수호대장이다.</dd></div><div><dt>무장</dt><dd>흑철 중갑주와 주술 사슬 대검을 사용한다.</dd></div></dl></div></article>
+      </div>
+    </section>
+
+    <section class="guardian-list enemy-section dark-bg-section" id="shadow">
+      <div class="shell">
+        <div class="faction-header">
+          <p class="overline">FACTION 03</p>
+          <h2>기억 저편의 암운</h2>
+          <p>대진의 균열 너머에서 각자의 욕망을 품고 주신과 신수의 관계를 파고드는 존재들이다.</p>
+        </div>
+        <article class="guardian"><div class="portrait"><img src="https://i.imgur.com/n9FJvgL.png" alt="황륜 상세 초상" loading="lazy"></div><div class="guardian-copy"><p class="direction">古代 · 흑금의 봉인</p><h2>황륜 <small>黃輪</small></h2><p class="guardian-kind">고대 황룡 · 암운의 군주</p><blockquote data-character-quote="hwangryun">“수천 년 만에 마주한 그대의 신위는 참으로 어여쁘구나. 순순히 내 아래에 엎드려 그 권능을 내게 바치라.”</blockquote><dl><div><dt>인물</dt><dd>주신의 신위를 빼앗으려다 함께 봉인된 고대 황룡이다.</dd></div><div><dt>권능</dt><dd>중력파동과 흑금 사슬로 상대를 굴복시킨다.</dd></div></dl></div></article>
+        <article class="guardian reverse"><div class="portrait"><img src="https://i.imgur.com/IJA6D36.png" alt="창혈 상세 초상" loading="lazy"></div><div class="guardian-copy"><p class="direction">古代 · 피 냄새를 좇는 사냥터</p><h2>창혈 <small>蒼血</small></h2><p class="guardian-kind">타락한 이리 영물 · 열등한 포식자</p><blockquote data-character-quote="changhyeol">“크하하! 냄새 좋네, 나의 주신. 그 고귀한 피 냄새가 내 이빨을 아주 시리게 만들어.”</blockquote><dl><div><dt>인물</dt><dd>직계 수호 혈통에서 밀려난 방계 이리 영물이다.</dd></div><div><dt>권능</dt><dd>이리로 변해 사냥감을 추적하고 지워지지 않는 표식을 남긴다.</dd></div></dl></div></article>
+        <article class="guardian"><div class="portrait"><img src="https://i.imgur.com/ndHuhQH.png" alt="유화 상세 초상" loading="lazy"></div><div class="guardian-copy"><p class="direction">古代 · 심해의 거울꽃</p><h2>유화 <small>幽華</small></h2><p class="guardian-kind">경어목 환화 요괴 · 몽환의 공작자</p><blockquote data-character-quote="yuhwa">“불쌍하여라... 그대를 향한 아름다운 충심이, 결국 그대를 파멸시킬 독이 될 줄이야.”</blockquote><dl><div><dt>인물</dt><dd>심해 괴물의 눈에서 태어난 환화 요괴다.</dd></div><div><dt>권능</dt><dd>몽환안으로 거짓 기억과 환영을 비춘다.</dd></div></dl></div></article>
+        <article class="guardian reverse"><div class="portrait"><img src="https://i.imgur.com/tBR58Zw.png" alt="녹요 상세 초상" loading="lazy"></div><div class="guardian-copy"><p class="direction">古代 · 경계 없는 유랑길</p><h2>녹요 <small>綠妖</small></h2><p class="guardian-kind">유랑 도깨비 · 정보상과 암살자</p><blockquote data-character-quote="nokyo">“딴제국 놈들이 당신 목에 어마어마한 현상금을 걸었거든. 하지만 말이야... 내 손에 잡히는 게 그 둔한 기공병들한테 잡히는 것보다 훨씬 안전할걸?”</blockquote><dl><div><dt>인물</dt><dd>도깨비의 유물을 훔쳐 힘을 얻은 유랑자다.</dd></div><div><dt>권능</dt><dd>청록 불꽃과 훔친 기공 도구를 함께 사용한다.</dd></div></dl></div></article>
+      </div>
+    </section>
+
+    <!-- [4] 세계의 잔영 (NPC 리스트) -->
+    <section class="npc-section" id="inhabitants">
+      <div class="shell">
+        <div class="faction-header">
+          <p class="overline">INHABITANTS OF THE WORLD</p>
+          <h2>세계의 잔영 <small>(신역과 제국에 살아가는 이들)</small></h2>
+          <p>주신의 부활과 세력 간의 충돌 속에서 저마다의 삶을 이어가는 인물군.</p>
+        </div>
+        <ul class="npc-list">
+          <li>
+            <strong>태허궁 잔존 신좌 종지기들</strong>
+            <span>사운의 통제하에 폐허가 된 신전의 먼지를 털어내며 주신의 부활을 기원해 온 늙은 신관들.</span>
+          </li>
+          <li>
+            <strong>천경 기공 병단</strong>
+            <span>신력 튜브와 주술 사슬, 증기 총검을 휘두르는 제국의 정예 중갑주 군대.</span>
+          </li>
+          <li>
+            <strong>남부 주작궁 화림 유랑민</strong>
+            <span>적련의 제어되지 않는 불꽃을 피해 신역 구석에서 기우제를 지내는 피난민들.</span>
+          </li>
+          <li>
+            <strong>서방 무관 지휘관들</strong>
+            <span>사백의 단단한 지배 아래 백호궁 경계를 지키는 호전적인 백호 족속 전사들.</span>
+          </li>
+          <li>
+            <strong>천경 신력 추출소 기술자들</strong>
+            <span>제갈영의 도면에 따라 신석을 깎고 마물의 신력을 짜내는 차가운 연구원들.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 하단 이동 링크 -->
+    <section class="journey">
+      <div class="shell journey-grid">
+        <div>
+          <p class="overline">기록을 마치며</p>
+          <h2>어느 신수부터 찾아갈지,<br>선택은 주신에게 달려 있다.</h2>
+        </div>
+        <div>
+          <a class="primary-link" href="index.html">세계관 소개 페이지로 돌아가기 <span>→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span>神緯錄 · 몰락한 신수들의 신</span>
+      <a href="#guardians">맨 위로</a>
+    </div>
+  </footer>
+
+  <script>
+    const bgm = document.getElementById('bgm');
+    const bgmToggleBtn = document.getElementById('bgmToggleBtn');
+
+    // BGM 켜기 / 끄기 수동 버튼
+    bgmToggleBtn.addEventListener('click', () => {
+      if (bgm.paused) {
+        bgm.volume = 0.4;
+        bgm.play();
+        bgmToggleBtn.innerText = '🎵 BGM ON';
+        bgmToggleBtn.classList.remove('off');
+      } else {
+        bgm.pause();
+        bgmToggleBtn.innerText = '🔇 BGM OFF';
+        bgmToggleBtn.classList.add('off');
+      }
+    });
+  </script>
+</body>
+</html>
